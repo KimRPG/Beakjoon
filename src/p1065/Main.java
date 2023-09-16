@@ -8,6 +8,7 @@ public class Main {
         int number = s.nextInt();
         int answer = count(number);
 
+
         System.out.println(answer);
 
     }
