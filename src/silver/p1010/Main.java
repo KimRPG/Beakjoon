@@ -1,4 +1,4 @@
-package p1010;
+package silver.p1010;
 //
 //import java.math.BigInteger;
 //import java.util.Scanner;

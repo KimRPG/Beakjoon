@@ -1,4 +1,4 @@
-package p1002;
+package silver.p1002;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package p1094;
+package silver.p1094;
 
 import java.util.Scanner;
 

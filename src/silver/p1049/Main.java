@@ -1,4 +1,4 @@
-package p1049;
+package silver.p1049;
 
 import java.util.*;
 

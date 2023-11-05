@@ -1,4 +1,4 @@
-package p1004;
+package silver.p1004;
 
 import java.util.ArrayList;
 import java.util.List;

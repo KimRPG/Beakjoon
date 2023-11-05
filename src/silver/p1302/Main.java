@@ -1,4 +1,4 @@
-package p1302;
+package silver.p1302;
 
 import java.util.*;
 

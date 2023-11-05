@@ -1,4 +1,4 @@
-package p1620;
+package silver.p1620;
 
 import java.util.ArrayList;
 import java.util.HashMap;

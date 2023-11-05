@@ -1,4 +1,4 @@
-package p1120;
+package silver.p1120;
 
 import java.util.Scanner;
 

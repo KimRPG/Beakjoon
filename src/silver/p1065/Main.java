@@ -1,4 +1,4 @@
-package p1065;
+package silver.p1065;
 
 import java.util.Scanner;
 

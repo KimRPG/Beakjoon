@@ -1,4 +1,4 @@
-package P1026;
+package silver.P1026;
 
 import java.util.ArrayList;
 import java.util.Collections;
