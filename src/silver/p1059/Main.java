@@ -1,36 +1,40 @@
 package silver.p1059;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-        int setLength = Integer.parseInt(br.readLine());
-        int result;
-        List<Integer> list = new ArrayList<>();
         StringTokenizer st = new StringTokenizer(br.readLine());
-        while(st.hasMoreTokens()){
-            list.add(Integer.parseInt(st.nextToken()));
+
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 1; i <= N; i++) {
+            q.add(i);
         }
-        int n = Integer.parseInt(br.readLine());
-        list.add(n);
-        list.sort(Comparator.naturalOrder());
 
-        int i = list.indexOf(n);
-        if(i==0){
-            result = (n) * (list.get(i + 1) - n) - 1;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<");
+//      q.isEmpty()
+        while (q.size() != 1) {
+            for (int i = 0; i < K - 1; i++) {
+                q.add(q.poll());
+            }
+            sb.append(q.poll()).append(", ");
         }
-        else if(i==setLength){
-            result =(n - list.get(i - 1)) * (1000-n) -1;
-        } else result = (n - list.get(i - 1)) * (list.get(i + 1) - n) - 1;
-        if( result <0)  result =0;
+//        sb.setLength(sb.length()-2);
+        sb.append(q.poll()).append(">");
 
-        bw.write(String.valueOf(result));
-
-        bw.flush();
-        bw.close();
+        System.out.println(sb + "\n");
+        br.close();
     }
 }

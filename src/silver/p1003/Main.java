@@ -1,20 +1,30 @@
 package silver.p1003;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
     static long[] arr;
 
-    public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = s.nextInt();
-        for(int i = 0; i < N + 1; i++) {
-            arr[i] = -1;
+        int testcase = Integer.parseInt(br.readLine());
+        for (int i = 0; i < testcase; i++) {
+            int N = Integer.parseInt(br.readLine());
+            arr = new long[N + 1];
+            for(int j = 0; j < N + 1; j++) {
+                arr[j] = -1;
+            }
+            arr[0] = 0;
+            arr[1] = 1;
+
+            System.out.println(fib(N));
+            System.out.println(fib(N-1));
         }
-        arr[0] = 0;
-        arr[1] = 1;
-        System.out.println(fib(N));
+
+
     }
 
     public static long fib(int n) {
