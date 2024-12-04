@@ -16,14 +16,7 @@ public class Main {
     static int divide(int number) {
         if(a[number] !=0) return a[number];
         else {
-            if (number % 6 == 0) {
-                return a[number] = Math.min(Math.min(divide(number / 3) + 1, divide(number / 2) + 1), divide(number - 1) + 1);
-            }
-            else if (number % 3 == 0) {
-                return a[number] = Math.min(divide(number / 3) + 1, divide(number - 1) + 1);
-            } else if (number % 2 == 0) {
-                return a[number] = Math.min(divide(number / 2) + 1, divide(number - 1) + 1);
-            } else return a[number] = divide(number - 1) + 1;
+            return a[number] = Math.min(divide(number / 3) + 1 + number % 3, divide(number / 2) + 1 + number % 2);
         }
     }
 
