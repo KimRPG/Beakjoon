@@ -28,7 +28,7 @@ public class Main {
     static void dfs(int index) {
         set.add(index);
         for (int i = 0; i < N + 1; i++) {
-            if (graph[index][i] == 1) {
+            if (graph[index][i] == 1 && set.contains(index)) {
                 graph[index][i] =graph[i][index] = 0;
                 dfs(i);
             }
