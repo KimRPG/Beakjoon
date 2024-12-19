@@ -1,43 +1,37 @@
-import java.io.*;
 import java.util.*;
 
-public class Main {
-    static int[] parent;
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        HashSet<Integer> set = new HashSet<>();
-        parent = new int[N];
-        for (int i = 0; i < N; i++) {
-            parent[i] = i;
+class Main {
+    static int read() throws Exception {
+        int c, n = System.in.read() & 15;
+        while ((c = System.in.read()) > 47) n = (n << 3) + (n << 1) + (c & 15);
+        return n;
+    }
+    
+    public static void main(String[] args) throws Exception {
+        int n = read();
+        int m = read();
+        int[] un = new int[n + 1];
+        for (int i = 1; i <= n; i++) un[i] = i;
+        for (int i = 0; i < m; i++) {
+            int a = read();
+            int b = read();
+            union(un, a, b);
         }
-        for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(br.readLine());
-            union(Integer.parseInt(st.nextToken())-1, Integer.parseInt(st.nextToken())-1);
+        Set<Integer> set = new HashSet<>();
+        for (int i = 1; i <= n; i++) {
+            set.add(find(un, i));
         }
-        for (int i = 0; i < N; i++) {
-            set.add(find(i));
-        }
-
         System.out.println(set.size());
-
     }
-
-    static void union(int x, int y) {
-        x = find(x);
-        y = find(y);
-
-        if (x != y) {
-            parent[y] = x;
-        }
+    
+    static void union(int[] un, int a, int b) {
+        int fa = find(un, a);
+        int fb = find(un, b);
+        if (fa != fb) un[fa] = fb;
     }
-
-    static int find(int xy) {
-        if (parent[xy] == xy) {
-            return xy;
-        }
-        return parent[xy] = find(parent[xy]); // 경로 압축
+    
+    static int find(int[] un, int a) {
+        if (a == un[a]) return a;
+        return un[a] = find(un, un[a]);
     }
 }
