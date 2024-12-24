@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
@@ -8,7 +9,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         int ans = 0;
-        HashSet<Integer> set = new HashSet<>();
+        HashMap<Integer,Integer> map = new HashMap<>();
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int[] list = new int[N];
@@ -20,10 +21,10 @@ public class Main {
 
         for (int i = 0; i < N; i++) {
             int b = list[i];
-            if (set.contains(a - b)) {
+            if (map.containsKey(a - b)) {
                 ans++;
             } else {
-                set.add(b);
+                map.put(b, 0);
             }
         }
 
