@@ -1,42 +1,53 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+class Main {
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-        int[][] dp = new int[100_000][2];
-        int T = Integer.parseInt(br.readLine());
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < T; i++) {
-            int n = Integer.parseInt(br.readLine());
 
+        int T, N, a, b, c;
+        StringTokenizer st;
+
+        T = Integer.parseInt(br.readLine());
+
+        int[][] dp = new int[2][100000];
+        StringBuilder sb = new StringBuilder();
+
+        while (T-- > 0) {
+
+            N = Integer.parseInt(br.readLine());
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < n; j++) {
-                dp[j][0] = Integer.parseInt(st.nextToken());
-            }
+            for (int i = 0; i < N; i++) dp[0][i] = Integer.parseInt(st.nextToken());
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < n; j++) {
-                dp[j][1] = Integer.parseInt(st.nextToken());
-            }
-            if (n == 1) {
-                int ans = Math.max(dp[n - 1][0], dp[n - 1][1]);
-                sb.append(ans).append("\n");
+            for (int i = 0; i < N; i++) dp[1][i] = Integer.parseInt(st.nextToken());;
+
+            if(N==1){
+                sb.append(Math.max(dp[0][N - 1], dp[1][N - 1])).append('\n');
                 continue;
             }
-            dp[1][0] += dp[0][1];
+            dp[0][1] += dp[1][0];
             dp[1][1] += dp[0][0];
 
-            for (int j = 2; j < n; j++) {
-                dp[j][0] = Math.max(Math.max(dp[j - 1][1] + dp[j][0], dp[j - 2][0] + dp[j][0]), dp[j - 2][1] + dp[j][0]);
-                dp[j][1] = Math.max(Math.max(dp[j - 1][0] + dp[j][1], dp[j - 2][0] + dp[j][1]), dp[j - 2][1] + dp[j][1]);
+            for (int i = 2; i < N; i++) {
+
+                c = Math.max(dp[0][i - 2], dp[1][i - 2]);
+                a = Math.max(c, dp[1][i - 1]);
+                b = Math.max(c, dp[0][i - 1]);
+
+                dp[0][i] += a;
+                dp[1][i] += b;
+
             }
-            int ans = Math.max(dp[n - 1][0], dp[n - 1][1]);
-            sb.append(ans).append("\n");
+
+            sb.append(Math.max(dp[0][N - 1], dp[1][N - 1])).append('\n');
+
         }
 
-        System.out.println(sb);
-    }
-    
-}
+        System.out.print(sb);
 
+    }
+
+
+
+}
