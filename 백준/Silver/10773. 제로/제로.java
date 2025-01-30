@@ -1,23 +1,28 @@
 import java.io.*;
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Stack<Integer> st = new Stack<>();
-        int N = Integer.parseInt(br.readLine());
-        int ans = 0;
-        for (int i = 0; i < N; i++) {
+        List<Integer> arr = new ArrayList<>();
+        int K = Integer.parseInt(br.readLine());
+        int size = -1;
+        for (int i = 0; i < K; i++) {
             int a = Integer.parseInt(br.readLine());
-            if (a == 0) st.pop();
-            else st.push(a);
+            if (a == 0) {
+                arr.remove(size); //O(n)
+                size--;
+            }
+            else{
+                arr.add(a); //O(1)
+                size++;
+            }
         }
-
-        while (!st.empty()) {
-            ans += st.pop();
+        int ans = 0;
+        for (int element : arr) {
+            ans += element; //O(n)
         }
-
         System.out.println(ans);
     }
 }
-
