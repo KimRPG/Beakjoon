@@ -9,8 +9,9 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
         TreeSet<String> set = new TreeSet<>((o1, o2) -> {
             return o2.compareTo(o1);});
+        StringTokenizer st;
         for (int i = 0; i < N; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
+            st = new StringTokenizer(br.readLine());
             String name = st.nextToken();
             String command = st.nextToken();
 
