@@ -7,7 +7,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        HashSet<String> set = new HashSet<>();
+        TreeSet<String> set = new TreeSet<>((o1, o2) -> {
+            return o2.compareTo(o1);});
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             String name = st.nextToken();
@@ -20,11 +21,10 @@ public class Main {
                 set.remove(name);
             }
         }
-        List<String> tempSet = new ArrayList<>(set);
-        tempSet.sort(Comparator.reverseOrder());
 
-        for (String string : tempSet) {
+        for (String string : set) {
             System.out.println(string);
         }
+
     }
 }
