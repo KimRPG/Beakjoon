@@ -6,7 +6,7 @@ public class Main {
     static int[] arr;
     static int[] ans;
     static boolean[] visit;
-    static Set<String> set = new LinkedHashSet<>();
+    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,26 +25,27 @@ public class Main {
         Arrays.sort(arr);
         dfs(0);
 
-        for (String str : set) {
-            System.out.println(str);
-        }
+        System.out.println(sb);
     }
 
     public static void dfs(int level) {
         if (level == M) {
-            StringBuilder str = new StringBuilder();
             for (int i = 0; i < M; i++) {
-                str.append(ans[i]).append(" ");
+                sb.append(ans[i]).append(" ");
             }
-            set.add(str.toString());
+            sb.append("\n");
         }else {
             for (int i = 0; i < N; i++) {
-                if (!visit[i]) {
-                    ans[level] = arr[i];
-                    visit[i] = true;
-                    dfs(level + 1);
-                    visit[i] = false;
+                if(visit[i]) continue;
+                if (i >= 1 && arr[i] == arr[i - 1] && !visit[i-1]) {
+//                    System.out.println("arr[i] = " + arr[i] + "arr[i-1] =" + arr[i - 1]);
+                    continue;
                 }
+                ans[level] = arr[i];
+                visit[i] = true;
+                dfs(level + 1);
+                visit[i] = false;
+
             }
         }
     }
