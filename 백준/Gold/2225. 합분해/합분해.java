@@ -7,8 +7,8 @@ public class Main{
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
-        long[] dp = new long[N + 1];
-        dp[0] = 1L;
+        int[] dp = new int[N + 1];
+        dp[0] = 1;
         for (int i = 0; i < K; i++) {
             for (int j = 1; j <= N; j++) {
                 dp[j] = (dp[j - 1] + dp[j]) % 1_000_000_000;
