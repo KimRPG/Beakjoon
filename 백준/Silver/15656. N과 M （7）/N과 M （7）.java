@@ -18,7 +18,7 @@ public class Main {
         }
         Arrays.sort(arr);
         back(0);
-        System.out.println(sb);
+        System.out.println(sb.toString());
     }
 
     public static void back(int n) {
