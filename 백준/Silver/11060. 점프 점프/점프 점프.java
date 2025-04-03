@@ -12,7 +12,7 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int[] arr = new int[N];
         int[] dp = new int[N];
-        Arrays.fill(dp, 100000);
+        Arrays.fill(dp, Integer.MAX_VALUE-100);
         dp[N - 1] = 0;
         for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
@@ -24,7 +24,7 @@ public class Main {
                 }
             }
         }
-        System.out.println(dp[0] == 100000 ? -1 : dp[0]);
+        System.out.println(dp[0] == Integer.MAX_VALUE-100 ? -1 : dp[0]);
 
 
     }
