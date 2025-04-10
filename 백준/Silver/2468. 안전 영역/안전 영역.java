@@ -33,7 +33,7 @@ public class Main {
                 for (int k = 0; k < N; k++) {
                     if (!isVisit[j][k] && graph[j][k] > i) {
                         ans++;
-                        BFS(j, k, i);
+                        DFS(j, k, i);
                     }
                 }
             }
@@ -58,6 +58,18 @@ public class Main {
                 queue.add(new int[]{nx, ny});
                 isVisit[nx][ny] = true;
             }
+        }
+    }
+
+    public static void DFS(int x, int y, int water) {
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
+            if(isVisit[nx][ny]) continue;
+            if(graph[nx][ny] <= water) continue;
+            isVisit[nx][ny] = true;
+            DFS(nx, ny, water);
         }
     }
 }
