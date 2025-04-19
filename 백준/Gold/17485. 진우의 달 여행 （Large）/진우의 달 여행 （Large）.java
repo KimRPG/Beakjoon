@@ -1,9 +1,6 @@
-import java.util.*;
-import java.io.*;
-
 public class Main {
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         int N = read();
         int M = read();
         int[][] arr = new int[N][M];
@@ -43,10 +40,10 @@ public class Main {
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < 3; j++) {
                 min = Math.min(min, dp[N - 1][i][j]);
-
             }
         }
-        System.out.println(min);
+        sb.append(min);
+        System.out.println(sb);
     }
 
     private static int read() throws Exception {
