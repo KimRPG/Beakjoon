@@ -1,60 +1,60 @@
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) throws Exception {
         StringBuilder sb = new StringBuilder();
         int N = read();
         int M = read();
+
         int[][] arr = new int[N][M];
-        int[][][] dp = new int[N][M][3];
+        int[][] prev = new int[M][3];
+        int[][] curr = new int[M][3];
+
+        // 첫 줄 입력 및 초기화
         for (int i = 0; i < M; i++) {
-            int a = read();
-            arr[0][i] = a;
-            dp[0][i][0] = a;
-            dp[0][i][1] = a;
-            dp[0][i][2] = a;
+            arr[0][i] = read();
+            prev[i][0] = arr[0][i];
+            prev[i][1] = arr[0][i];
+            prev[i][2] = arr[0][i];
         }
+
+        // 나머지 줄 입력
         for (int i = 1; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 arr[i][j] = read();
             }
-        }
 
-        for (int i = 1; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                if (j == 0) {
-                    dp[i][j][0] = 100_000_000;
-                    dp[i][j][1] = Math.min(dp[i - 1][j][0], dp[i - 1][j][2]) + arr[i][j];
-                    dp[i][j][2] = Math.min(dp[i - 1][j + 1][0], dp[i - 1][j + 1][1]) + arr[i][j];
-                } else if (j == M - 1) {
-                    dp[i][j][0] = Math.min(dp[i - 1][j - 1][1], dp[i - 1][j - 1][2]) + arr[i][j];
-                    dp[i][j][1] = Math.min(dp[i - 1][j][0], dp[i - 1][j][2]) + arr[i][j];
-                    dp[i][j][2] =  100_000_000;
-                }else{
-                    dp[i][j][0] = Math.min(dp[i - 1][j - 1][1], dp[i - 1][j - 1][2]) + arr[i][j];
-                    dp[i][j][1] = Math.min(dp[i - 1][j][0], dp[i - 1][j][2]) + arr[i][j];
-                    dp[i][j][2] = Math.min(dp[i - 1][j + 1][0], dp[i - 1][j + 1][1]) + arr[i][j];
+                int left = j - 1;
+                int right = j + 1;
+                int val = arr[i][j];
 
-                }
+                curr[j][0] = (left < 0) ? 100_000_000 : Math.min(prev[left][1], prev[left][2]) + val;
+                curr[j][1] = Math.min(prev[j][0], prev[j][2]) + val;
+                curr[j][2] = (right >= M) ? 100_000_000 : Math.min(prev[right][0], prev[right][1]) + val;
             }
+
+            // swap
+            int[][] temp = prev;
+            prev = curr;
+            curr = temp;
         }
+
         int min = 100_000_000;
         for (int i = 0; i < M; i++) {
-            for (int j = 0; j < 3; j++) {
-                min = Math.min(min, dp[N - 1][i][j]);
+            for (int d = 0; d < 3; d++) {
+                min = Math.min(min, prev[i][d]);
             }
         }
+
         sb.append(min);
         System.out.println(sb);
     }
 
     private static int read() throws Exception {
-
         int c, n = System.in.read() & 15;
-
         while ((c = System.in.read()) > 32)
             n = (n << 3) + (n << 1) + (c & 15);
-
         return n;
-
     }
-
 }
