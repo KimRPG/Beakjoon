@@ -1,27 +1,29 @@
-import java.io.*;
-import java.util.*;
-public class Main {
+class Main {
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int[] arr = new int[N];
+        int N = read();
+        int M = read();
         int[] prefix = new int[N+1];
-        st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-            prefix[i + 1] = prefix[i] + arr[i];
+            prefix[i + 1] = prefix[i] + read();
         }
         for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(br.readLine());
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
+            int start = read();
+            int end = read();
             sb.append(prefix[end] - prefix[start-1]).append("\n");
         }
         System.out.println(sb);
+
+    }
+    private static int read() throws Exception {
+
+        int c, n = System.in.read() & 15;
+
+        while ((c = System.in.read()) > 32)
+            n = (n << 3) + (n << 1) + (c & 15);
+
+        return n;
 
     }
 
