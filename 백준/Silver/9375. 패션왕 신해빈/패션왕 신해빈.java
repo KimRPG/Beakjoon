@@ -11,12 +11,7 @@ public class Main {
             int N = Integer.parseInt(br.readLine());
             for (int j = 0; j < N; j++) {
                 String[] st = br.readLine().split(" ");
-                if (!map.containsKey(st[1])) {
-                    map.put(st[1], 2);
-                }else{
-                    int a = map.get(st[1]) + 1;
-                    map.put(st[1], a);
-                }
+                map.put(st[1], map.getOrDefault(st[1], 1) + 1);
             }
             int ans = 1;
             for (Integer val : map.values()) {
