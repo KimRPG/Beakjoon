@@ -16,8 +16,11 @@ public class Main {
             }
         }
         StringBuilder sb = new StringBuilder();
-        for(String i : map.keySet()){ 
-            System.out.println(i + " " + map.get(i));}
+        for(String i : map.keySet()){
+            sb.append(i).append(" ").append(map.get(i)).append("\n");
+        }
+        System.out.println(sb);
     }
+
 
 }
