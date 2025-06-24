@@ -8,20 +8,21 @@ public class Main {
         Stack<Integer> stack = new Stack<>();
         int N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        ArrayList<Integer> list = new ArrayList<>();
+        int current = 1;
         for (int i = 0; i < N; i++) {
             int a = Integer.parseInt(st.nextToken());
-            if (list.size() + 1 == a) {
-                list.add(a);
+            if (current == a) {
+                current++;
             }else{
                 stack.add(a);
             }
-            while (!stack.isEmpty() && list.size() + 1 == stack.peek()) {
-                list.add(stack.pop());
+            while (!stack.isEmpty() && current == stack.peek()) {
+                stack.pop();
+                current++;
             }
         }
 
 
-        System.out.println(list.size()== N ? "Nice" : "Sad");
+        System.out.println(current == N+1 ? "Nice" : "Sad");
     }
 }
