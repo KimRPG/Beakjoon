@@ -4,17 +4,14 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws Exception {
         TreeMap<Integer, Integer> treeMap = new TreeMap<>();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int a = Integer.parseInt(st.nextToken());
-        int b = Integer.parseInt(st.nextToken());
-        st = new StringTokenizer(br.readLine());
+        int a = read();
+        int b =read();
         for (int i = 0; i < a; i++) {
-            treeMap.put(Integer.parseInt(st.nextToken()), 0);
+            treeMap.put(read(), 0);
+
         }
-        st = new StringTokenizer(br.readLine());
         for (int i = 0; i < b; i++) {
-            treeMap.remove(Integer.parseInt(st.nextToken()));
+            treeMap.remove(read());
         }
         StringBuilder sb = new StringBuilder();
         sb.append(treeMap.size()).append("\n");
@@ -24,4 +21,14 @@ public class Main {
         System.out.println(sb);
     }
 
+    private static int read() throws Exception {
+
+        int c, n = System.in.read() & 15;
+
+        while ((c = System.in.read()) > 32)
+            n = (n << 3) + (n << 1) + (c & 15);
+
+        return n;
+
+    }
 }
