@@ -4,18 +4,16 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
+        int N = read();
         int[] times = new int[N];
         int[] result = new int[N];
         for (int i = 0; i < N; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int time = Integer.parseInt(st.nextToken());
+            int time = read();
             times[i] = time;
             result[i] = time;
-            int a = Integer.parseInt(st.nextToken());
+            int a = read();
             for (int j = 0; j < a; j++) {
-                result[i] = Math.max(result[i], result[Integer.parseInt(st.nextToken()) - 1] + times[i]);
+                result[i] = Math.max(result[i], result[read()-1] + times[i]);
             }
         }
         int max = 0;
@@ -24,5 +22,16 @@ public class Main {
         }
 
         System.out.println(max);
+    }
+
+    private static int read() throws Exception {
+
+        int c, n = System.in.read() & 15;
+
+        while ((c = System.in.read()) > 32)
+            n = (n << 3) + (n << 1) + (c & 15);
+
+        return n;
+
     }
 }
