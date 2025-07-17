@@ -13,22 +13,21 @@ public class Main {
         for (int i = 1; i <= N; i++) {
             list[i] = new ArrayList<>();
         }
-        Stack<Integer> stack = new Stack<>();
 
 
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            inDegree[a]++;
-            list[b].add(a);
+            inDegree[b]++;
+            list[a].add(b);
         }
         StringBuilder sb = new StringBuilder();
         Queue<Integer> queue = new ArrayDeque<>();
         for (int i = 1; i <= N; i++) {
             if (inDegree[i] == 0) {
+                sb.append(i).append(" ");
                 queue.add(i);
-                stack.add(i);
             }
         }
         while (!queue.isEmpty()) {
@@ -36,15 +35,12 @@ public class Main {
             for (int next : list[start]) {
                 inDegree[next]--;
                 if (inDegree[next] == 0) {
+                    sb.append(next).append(" ");
                     queue.add(next);
-                    stack.add(next);
                 }
             }
         }
 
-        while (!stack.isEmpty()) {
-            sb.append(stack.pop()).append(" ");
-        }
 
         System.out.println(sb);
 
