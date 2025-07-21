@@ -4,13 +4,11 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        int T = Integer.parseInt(br.readLine());
+        int T = read();
         for (int i = 0; i < T; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int N = Integer.parseInt(st.nextToken());
-            int K = Integer.parseInt(st.nextToken());
+            int N = read();
+            int K = read();
             int[] time = new int[N];
             int[] dp = new int[N];
             int[] inDegree = new int[N];
@@ -19,14 +17,12 @@ public class Main {
             for (int j = 0; j < N; j++) {
                 arr[j] = new ArrayList<>();
             }
-            st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
-                time[j] = Integer.parseInt(st.nextToken());
+                time[j] = read();
             }
             for (int j = 0; j < K; j++) {
-                st = new StringTokenizer(br.readLine());
-                int x = Integer.parseInt(st.nextToken()) - 1;
-                int y = Integer.parseInt(st.nextToken()) - 1;
+                int x = read() - 1;
+                int y = read() - 1;
                 inDegree[y]++;
                 arr[x].add(y);
             }
@@ -44,10 +40,21 @@ public class Main {
             }
 
 
-            int ans = Integer.parseInt(br.readLine());
+            int ans = read();
             sb.append(dp[ans - 1]).append("\n");
         }
         System.out.println(sb);
+
+    }
+
+    private static int read() throws Exception {
+
+        int c, n = System.in.read() & 15;
+
+        while ((c = System.in.read()) > 32)
+            n = (n << 3) + (n << 1) + (c & 15);
+
+        return n;
 
     }
 }
