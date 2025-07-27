@@ -1,25 +1,17 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-
-    public static void main(String[] args)throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        String str = br.readLine();
-
-        int count = 0;
-        char word = str.charAt(0);
-
-        for(int i = 1; i < str.length(); i++) {
-            if(word != str.charAt(i)) {
-                word = str.charAt(i);
-                count ++;
+        char[] a = br.readLine().toCharArray();
+        int ans = 1;
+        for (int i = 1; i < a.length; i++) {
+            if (a[i - 1] != a[i]) {
+                ans++;
             }
         }
-
-        System.out.println((count / 2) + count % 2);
+        System.out.println(ans / 2);
     }
 }
