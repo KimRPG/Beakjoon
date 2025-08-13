@@ -1,46 +1,44 @@
 import java.io.*;
 import java.util.*;
- 
-public class Main {
- 
-    public static void main(String[] args) throws IOException {
- 
-        //입력
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
- 
-        int t = Integer.parseInt(bf.readLine());
-        for(int i = 0; i < t; i++) {
-            String str = bf.readLine();
-            int k = Integer.parseInt(bf.readLine()); 
-            //입력 끝
- 
-            if(k == 1) { //k가 1일때
-                System.out.println("1 1");
+class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < T; i++) {
+            String st = br.readLine();
+            int N = Integer.parseInt(br.readLine());
+            int[] alpha = new int[26];//알파벳 별 개수를 저장한다.
+
+            if(N == 1) { //k가 1일때
+                sb.append("1 1\n");
                 continue;
             }
- 
-            int[] alpha = new int[26];//알파벳 별 개수를 저장한다. 
-            for(int j = 0; j < str.length(); j++) {
-                alpha[str.charAt(j) - 'a']++;
+            for(int j = 0; j < st.length(); j++) {
+                alpha[st.charAt(j) - 'a']++;
             }
- 
-            int min = Integer.MAX_VALUE;
+            char[] chars = st.toCharArray();
             int max = -1;
-            for(int j = 0; j < str.length(); j++) {
-                if(alpha[str.charAt(j) - 'a'] < k) continue;
- 
+            int min = Integer.MAX_VALUE;
+            for(int j = 0 ; j < st.length() ; j++){
+                if(alpha[st.charAt(j) - 'a'] < N) continue;
                 int count = 1;
-                for(int l = j + 1; l < str.length(); l++) {
-                    if(str.charAt(j) == str.charAt(l)) count++;
-                    if(count == k) {
-                        min = Math.min(min, l - j + 1);
-                        max = Math.max(max, l - j + 1);
-                        break;
-                    }
+                for(int k = j+1; k< st.length(); k++){
+                    if(chars[j]  == chars[k]) count++;
+                    if (count == N) {
+                        min = Math.min(min, k - j + 1);
+                        max = Math.max(max, k - j + 1);
+                        break;}
+
                 }
             }
-            if(min == Integer.MAX_VALUE || max == -1) System.out.println("-1");
-            else System.out.println(min + " " + max);
+            if(min == Integer.MAX_VALUE || max == -1) sb.append(-1).append("\n");
+            else sb.append(min).append(" ").append(max).append("\n");
+
         }
-    }        
+        System.out.println(sb);
+    }
+
 }
+
