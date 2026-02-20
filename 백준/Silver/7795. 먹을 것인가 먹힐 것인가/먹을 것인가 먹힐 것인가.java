@@ -34,14 +34,15 @@ public class Main {
     public static int solution(int n, int m, int[] A,int[] B) {
         int result = 0;
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (B[j] < A[i]) {
-                    result++;
-                }else{
-                    break;
-                }
-
+            int low = 0; int high = m;
+            while(low < high) {
+                int mid = (low + high) / 2;
+                if(B[mid] < A[i])
+                    low = mid + 1;
+                else
+                    high = mid;
             }
+            result += low;
         }
 
 
