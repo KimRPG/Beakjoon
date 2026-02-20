@@ -19,25 +19,14 @@ public class Main {
             int end = Integer.parseInt(st.nextToken());
             pq.add(new int[]{start, end});
         }
-        int max = 0;
-
+        endQueue.add(pq.poll()[1]);
         while (!pq.isEmpty()) {
             int[] a = pq.poll();
-            if(endQueue.isEmpty()){
-                endQueue.add(a[1]);
-            }else{
-                while (!endQueue.isEmpty()) {
-                    int endTime = endQueue.peek();
-                    if (endTime <= a[0]) {
-                        endQueue.poll();
-                    } else {
-                        endQueue.add(a[1]);
-                        max = Math.max(max, endQueue.size());
-                        break;
-                    }
-                }
+            if (endQueue.peek() <= a[0]) {
+                endQueue.poll();
             }
+            endQueue.add(a[1]);
         }
-        System.out.println(max);
+        System.out.println(endQueue.size());
     }
 }
